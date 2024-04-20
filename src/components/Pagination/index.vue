@@ -1,9 +1,9 @@
 <template>
   <div>
-    <router-view></router-view>
+    <h1>分页组件</h1>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>
