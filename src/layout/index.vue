@@ -1,18 +1,14 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_slider">
+    <div class="layout_slider" :class="LayOutSettingStore.fold ? 'fold' : ''">
       <Logo></Logo>
       <!-- 展示菜单 -->
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
-        <el-menu
-          :default-active="$route.path"
-          background-color="#001529"
-          text-color="white"
-          :collapse="LayOutSettingStore.fold"
-        >
+        <el-menu :default-active="$route.path" background-color="#001529" text-color="white"
+          :collapse="LayOutSettingStore.fold">
           <!-- 根据路由动态生成菜单 -->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
@@ -61,20 +57,29 @@ export default {
 .layout_container {
   width: 100%;
   height: 100vh;
+
   .layout_slider {
     width: $base-menu-width;
     height: 100vh;
     background: $base-menu-background;
     color: #fff;
     transition: all 0.3s;
+
+    &.fold {
+      width: $base-menu-min-width;
+      // left: $base-menu-min-width;
+    }
+
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
+
       .el-menu {
         border: none;
       }
     }
   }
+
   .layout_tabbar {
     position: fixed;
     width: calc(100% - $base-menu-width);
@@ -83,11 +88,13 @@ export default {
     top: 0;
     left: $base-menu-width;
     transition: all 0.3s;
+
     &.fold {
       width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
     }
   }
+
   .layout_main {
     position: absolute;
     width: calc(100% - $base-menu-width);
@@ -97,6 +104,7 @@ export default {
     padding: 20px;
     overflow: auto;
     transition: all 0.3s;
+
     &.fold {
       width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
