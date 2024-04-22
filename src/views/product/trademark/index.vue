@@ -71,7 +71,12 @@
       :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
       width="500"
     >
-      <el-form style="width: 70%" :rules="rules" ref="formRef">
+      <el-form
+        style="width: 70%"
+        :model="trademarkParams"
+        :rules="rules"
+        ref="formRef"
+      >
         <el-form-item label="品牌名称" label-width="100px" prop="tmName">
           <el-input
             placeholder="请输入品牌名称"
@@ -172,9 +177,6 @@ const addTrademark = () => {
 }
 //点击修改品牌按钮
 const updateTrademark = (row: TradeMark) => {
-  dialogFormVisible.value = true
-  //es6语法合并对象
-  Object.assign(trademarkParams, row)
   // trademarkParams.id = row.id
   // trademarkParams.tmName =row.tmName
   // trademarkParams.logoUrl = row.logoUrl
@@ -182,6 +184,9 @@ const updateTrademark = (row: TradeMark) => {
     formRef.value.clearValidate('tmName')
     formRef.value.clearValidate('logoUrl')
   })
+  dialogFormVisible.value = true
+  //es6语法合并对象
+  Object.assign(trademarkParams, row)
 }
 //对话框确定按钮
 const confirm = async () => {
